@@ -1,0 +1,17 @@
+<div class="form-group">
+  <label for="buscar">Buscar:</label>
+  <input #searchInput (keyup)="search(searchInput.value)" class="form-control" id="buscar" placeholder="Empieza a escribir para buscar">
+</div>
+
+<app-loading [loading]="loading"></app-loading>
+
+<ng-container *ngIf="result$ | async as list">
+  <ng-container *ngIf="list.length; else noItems">
+    <app-list [list]="list" [fields]="fields"></app-list>
+  </ng-container>
+  <ng-template #noItems>
+    <div class="alert alert-info" role="alert">
+      Sin resultados.
+    </div>
+  </ng-template>
+</ng-container>
